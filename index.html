@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VEKTRA — Цифровое агентство. Сайты, приложения, боты, автоматизация." />
+  <meta property="og:url" content="https://symphonious-brioche-4e4e59.netlify.app/" />
+  <meta property="og:title" content="VEKTRA — Делаем то, что нельзя скачать." />
+  <meta property="og:description" content="Цифровое агентство. Сайты, приложения, боты, ведение соцсетей." />
+  <link rel="canonical" href="https://symphonious-brioche-4e4e59.netlify.app/" />
+  <title>VEKTRA — Делаем то, что нельзя скачать с шаблонника.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap');
+
+    /* ─── Tokens ─────────────────────────────────────────── */
+    :root {
+      --bg:       #EAE5FF;
+      --surface:  #F5F2FF;
+      --border:   #D0C9F0;
+      --accent:   #6C3BFF;
+      --accent2:  #8B5CF6;
+      --text:     #0D0B1A;
+      --muted:    #6B6585;
+      --tag-web:  #6C3BFF;
+      --tag-app:  #00D4AA;
+      --tag-bot:  #FF6B35;
+      --tag-auto: #FF3CAC;
+      --ease:     cubic-bezier(0.16, 1, 0.3, 1);
+      --t:        0.35s var(--ease);
+      --r:        4px;
+      --max:      1280px;
+    }
+
+    /* ─── Reset ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    img, svg { display: block; }
+    ul { list-style: none; }
+
+    /* ─── Typography ─────────────────────────────────────── */
+    .font-display { font-family: 'Syne', 'Arial Black', sans-serif; }
+
+    /* ─── Layout helpers ─────────────────────────────────── */
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 4rem); }
+    section { padding: clamp(5rem, 10vw, 9rem) 0; }
+
+    /* ─── Scroll reveal ──────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ─── Section label ──────────────────────────────────── */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 2rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent2);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 0;
+      background: rgba(243,240,255,0);
+      transition: background 0.4s, border-color 0.4s, padding 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(243,240,255,0.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-color: var(--border);
+      padding: 0.9rem 0;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--muted);
+      transition: color var(--t);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width var(--t);
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--text); }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+    .nav-cta {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 0.55rem 1.3rem;
+      border: 1px solid var(--accent);
+      border-radius: var(--r);
+      color: var(--accent);
+      transition: background var(--t), color var(--t);
+    }
+    .nav-cta:hover { background: var(--accent); color: #fff; }
+
+    /* Burger */
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+      z-index: 110;
+    }
+    .burger span {
+      display: block;
+      width: 22px; height: 1.5px;
+      background: var(--text);
+      transition: transform 0.3s, opacity 0.3s;
+      transform-origin: center;
+    }
+    .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile drawer */
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 105;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      transform: translateX(100%);
+      transition: transform 0.4s var(--ease);
+    }
+    .nav-drawer.open { transform: translateX(0); }
+    .nav-drawer a {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 8vw, 3rem);
+      font-weight: 700;
+      color: var(--muted);
+      transition: color var(--t);
+    }
+    .nav-drawer a:hover { color: var(--text); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .burger { display: flex; }
+      .nav-drawer { display: flex; }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════ */
+    #hero {
+      position: relative;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 0;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: -80px;
+      background-image: radial-gradient(circle, rgba(108,59,255,0.18) 1px, transparent 1px);
+      background-size: 44px 44px;
+      animation: drift 12s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes drift {
+      from { transform: translate(0, 0); }
+      to   { transform: translate(-44px, -44px); }
+    }
+    .hero-glow {
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(108,59,255,0.12) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      animation: pulse 6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+      50%       { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding-top: 6rem;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease) 0.2s forwards;
+    }
+    .hero-eyebrow-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 9vw, 9rem);
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease) 0.35s forwards;
+    }
+    .hero-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.65;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease) 0.5s forwards;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease) 0.65s forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.85rem 2rem;
+      border-radius: var(--r);
+      background: var(--accent);
+      color: #fff;
+      transition: box-shadow var(--t), transform var(--t);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 40px rgba(108,59,255,0.5);
+      transform: translateY(-2px);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 400;
+      padding: 0.85rem 2rem;
+      border-radius: var(--r);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      transition: border-color var(--t), color var(--t);
+    }
+    .btn-ghost:hover { border-color: var(--accent2); color: var(--text); }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0;
+      animation: fadeUp 1s var(--ease) 1.2s forwards;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollLine 1.5s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%,100% { transform: scaleY(1); opacity: 1; }
+      50%      { transform: scaleY(0.5); opacity: 0.4; }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SERVICES
+    ═══════════════════════════════════════════════════════ */
+    #services { border-top: 1px solid var(--border); }
+    .services-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .services-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+    .services-count {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .service-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: 3rem 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid var(--border);
+      cursor: default;
+      overflow: hidden;
+      transition: padding var(--t);
+    }
+    .service-row::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0;
+      width: 3px; height: 0;
+      background: var(--accent);
+      transition: height 0.4s var(--ease);
+    }
+    .service-row:hover::before { height: 100%; }
+    .service-row:hover { padding-left: 1rem; }
+    .service-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+    .service-info { min-width: 0; }
+    .service-name {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.3rem;
+      transition: color var(--t);
+    }
+    .service-row:hover .service-name { color: var(--accent2); }
+    .service-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s var(--ease), opacity 0.4s;
+      opacity: 0;
+    }
+    .service-row:hover .service-desc { max-height: 3rem; opacity: 1; }
+    .service-arrow {
+      color: var(--muted);
+      font-size: 1.2rem;
+      transition: transform var(--t), color var(--t);
+    }
+    .service-row:hover .service-arrow { transform: translate(4px, -4px); color: var(--accent); }
+
+    /* ═══════════════════════════════════════════════════════
+       PORTFOLIO
+    ═══════════════════════════════════════════════════════ */
+    #portfolio { border-top: 1px solid var(--border); }
+    .portfolio-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .portfolio-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 0.45rem 1.1rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      transition: all var(--t);
+    }
+    .filter-btn:hover { border-color: var(--accent2); color: var(--text); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    .portfolio-grid {
+      columns: 2;
+      column-gap: 1.5rem;
+    }
+    @media (max-width: 640px) { .portfolio-grid { columns: 1; } }
+
+    .portfolio-card {
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      position: relative;
+      cursor: pointer;
+      transition: border-color var(--t), transform var(--t);
+    }
+    .portfolio-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .portfolio-card.hidden { display: none; }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 16/10;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-img-bg {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s var(--ease);
+    }
+    .portfolio-card:hover .card-img-bg { transform: scale(1.06); }
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(108,59,255,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(100%);
+      transition: transform 0.4s var(--ease);
+    }
+    .portfolio-card:hover .card-overlay { transform: translateY(0); }
+    .card-view {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.6);
+      padding: 0.5rem 1.2rem;
+      border-radius: var(--r);
+    }
+    .card-body { padding: 1.25rem 1.5rem; }
+    .card-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 100px;
+      margin-bottom: 0.6rem;
+    }
+    .tag-web  { background: rgba(108,59,255,0.15); color: var(--tag-web); }
+    .tag-app  { background: rgba(0,212,170,0.12);  color: var(--tag-app); }
+    .tag-bot  { background: rgba(255,107,53,0.12); color: var(--tag-bot); }
+    .tag-auto { background: rgba(255,60,172,0.12); color: var(--tag-auto);}
+    .card-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.3rem;
+    }
+    .card-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+    /* ═══════════════════════════════════════════════════════
+       PROCESS
+    ═══════════════════════════════════════════════════════ */
+    #process { border-top: 1px solid var(--border); }
+    .process-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 3.5rem;
+    }
+    .process-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 1.5rem;
+      padding-bottom: 1.5rem;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .process-track::-webkit-scrollbar { display: none; }
+    .process-step {
+      scroll-snap-align: start;
+      flex: 0 0 min(340px, 82vw);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color var(--t);
+    }
+    .process-step:hover { border-color: var(--accent); }
+    .process-step::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s var(--ease);
+    }
+    .process-step:hover::before { transform: scaleX(1); }
+    .step-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 4rem;
+      font-weight: 800;
+      color: #C4B5FD;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.04em;
+      transition: color var(--t);
+    }
+    .process-step:hover .step-num { color: var(--accent); }
+    .step-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .step-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+
+    /* ═══════════════════════════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════════════════════════ */
+    #about { border-top: 1px solid var(--border); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 3rem; } }
+    .about-quote {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--text);
+    }
+    .about-quote em {
+      font-style: normal;
+      color: var(--accent2);
+    }
+    .about-body { font-size: 1rem; color: var(--muted); line-height: 1.75; margin-bottom: 2.5rem; }
+    .values {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .value-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+    .value-icon {
+      width: 28px; height: 28px;
+      border-radius: var(--r);
+      background: rgba(108,59,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .stats {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .stat { }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      line-height: 1;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; letter-spacing: 0.04em; }
+
+    /* ═══════════════════════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════════════════════ */
+    #contact { border-top: 1px solid var(--border); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 3rem; } }
+    .contact-headline {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .contact-headline em { font-style: normal; color: var(--accent); }
+    .contact-email {
+      display: inline-block;
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      transition: color var(--t);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.25rem;
+    }
+    .contact-email:hover { color: var(--accent2); border-color: var(--accent2); }
+    .socials {
+      display: flex;
+      gap: 1rem;
+    }
+    .social-link {
+      width: 40px; height: 40px;
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: border-color var(--t), color var(--t), background var(--t);
+    }
+    .social-link:hover { border-color: var(--accent); color: var(--accent); background: rgba(108,59,255,0.08); }
+    .form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .form-field label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 0.8rem 1rem;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color var(--t), box-shadow var(--t);
+      outline: none;
+      appearance: none;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(108,59,255,0.12);
+    }
+    .form-field select option { background: var(--surface); }
+    .form-field textarea { resize: vertical; min-height: 120px; }
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      border-radius: var(--r);
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: box-shadow var(--t), transform var(--t);
+    }
+    .form-submit:hover {
+      box-shadow: 0 0 30px rgba(108,59,255,0.4);
+      transform: translateY(-2px);
+    }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    .form-success.show { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+    .success-icon {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(0,212,170,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .success-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .success-text { font-size: 0.9rem; color: var(--muted); }
+
+    /* ═══════════════════════════════════════════════════════
+       TESTIMONIALS
+    ═══════════════════════════════════════════════════════ */
+    #testimonials { border-top: 1px solid var(--border); }
+    .testimonials-header { margin-bottom: 3rem; }
+    .testimonials-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
+    @media (min-width: 640px) and (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr 1fr; } }
+    .testimonial-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      position: relative;
+      transition: border-color var(--t), transform var(--t);
+    }
+    .testimonial-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .testimonial-quote-mark {
+      font-family: 'Syne', sans-serif;
+      font-size: 4rem;
+      line-height: 1;
+      color: var(--accent);
+      opacity: 0.3;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .testimonial-text {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .testimonial-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .testimonial-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    .testimonial-role { font-size: 0.78rem; color: var(--muted); }
+
+    /* ═══════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.75rem 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy { font-size: 0.8rem; color: var(--muted); }
+    .footer-back {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color var(--t);
+    }
+    .footer-back:hover { color: var(--accent2); }
+
+    /* ─── Responsive nav tweaks ───────────────────────────── */
+    @media (max-width: 900px) {
+      .nav-links .nav-cta { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="container nav-inner">
+    <a href="#hero" class="nav-logo">
+      <!-- VEKTRA SVG Logo -->
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="VEKTRA">
+        <path d="M4 6 L16 26 L28 6" stroke="#6C3BFF" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+        <line x1="22" y1="6" x2="32" y2="6" stroke="#6C3BFF" stroke-width="2.5" stroke-linecap="square"/>
+      </svg>
+      VEKTRA
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#portfolio">Портфолио</a></li>
+      <li><a href="#process">Процесс</a></li>
+      <li><a href="#about">О нас</a></li>
+      <li><a href="#contact" class="nav-cta">Обсудить проект</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<nav class="nav-drawer" id="drawer">
+  <a href="#services" class="drawer-link">Услуги</a>
+  <a href="#portfolio" class="drawer-link">Портфолио</a>
+  <a href="#process" class="drawer-link">Процесс</a>
+  <a href="#about" class="drawer-link">О нас</a>
+  <a href="#contact" class="drawer-link">Контакты</a>
+</nav>
+
+<!-- ═══ HERO ═══════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="container hero-content">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      Цифровое агентство
+    </div>
+    <h1 class="hero-title font-display">
+      Делаем то,<br />
+      что нельзя<br />
+      <em>скачать.</em>
+    </h1>
+    <p class="hero-sub">
+      Сайты, приложения, боты, автоматизация — сделано с точностью.
+      Без шаблонов. Без компромиссов. Только настоящий цифровой продукт.
+    </p>
+    <div class="hero-actions">
+      <a href="#portfolio" class="btn-primary">
+        Смотреть работы
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </a>
+      <a href="#contact" class="btn-ghost">Начать проект</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Скролл</span>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ══════════════════════════════════════════ -->
+<section id="services">
+  <div class="container">
+    <div class="services-header">
+      <div>
+        <div class="section-label reveal">Что мы делаем</div>
+        <h2 class="services-title font-display reveal reveal-delay-1">
+          Полный цикл<br />цифрового продукта
+        </h2>
+      </div>
+      <span class="services-count reveal">05 услуг</span>
+    </div>
+
+    <div class="service-row reveal">
+      <span class="service-num">01</span>
+      <div class="service-info">
+        <div class="service-name">Сайты и лендинги</div>
+        <div class="service-desc">Конвертирующие страницы, которые работают быстро и выглядят убедительно.</div>
+      </div>
+      <span class="service-arrow">↗</span>
+    </div>
+    <div class="service-row reveal reveal-delay-1">
+      <span class="service-num">02</span>
+      <div class="service-info">
+        <div class="service-name">Веб-приложения</div>
+        <div class="service-desc">Сложные SaaS, дашборды и кастомные платформы.</div>
+      </div>
+      <span class="service-arrow">↗</span>
+    </div>
+    <div class="service-row reveal reveal-delay-2">
+      <span class="service-num">03</span>
+      <div class="service-info">
+        <div class="service-name">Мобильные приложения</div>
+        <div class="service-desc">iOS и Android — приложения, которыми реально пользуются.</div>
+      </div>
+      <span class="service-arrow">↗</span>
+    </div>
+    <div class="service-row reveal reveal-delay-3">
+      <span class="service-num">04</span>
+      <div class="service-info">
+        <div class="service-name">Telegram боты</div>
+        <div class="service-desc">Умные боты, которые автоматизируют диалоги и продажи.</div>
+      </div>
+      <span class="service-arrow">↗</span>
+    </div>
+    <div class="service-row reveal reveal-delay-4">
+      <span class="service-num">05</span>
+      <div class="service-info">
+        <div class="service-name">Ведение блогов и социальных сетей</div>
+        <div class="service-desc">Создаём контент, который работает на репутацию и привлекает аудиторию.</div>
+      </div>
+      <span class="service-arrow">↗</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PORTFOLIO ═════════════════════════════════════════ -->
+<section id="portfolio">
+  <div class="container">
+    <div class="portfolio-header">
+      <div>
+        <div class="section-label reveal">Избранные работы</div>
+        <h2 class="portfolio-title font-display reveal reveal-delay-1">Портфолио</h2>
+      </div>
+      <div class="filters reveal reveal-delay-2">
+        <button class="filter-btn active" data-filter="all">Все</button>
+        <button class="filter-btn" data-filter="web">Сайт</button>
+        <button class="filter-btn" data-filter="app">Приложение</button>
+        <button class="filter-btn" data-filter="bot">Бот</button>
+        <button class="filter-btn" data-filter="auto">Авто</button>
+      </div>
+    </div>
+
+    <div class="portfolio-grid reveal">
+      <!-- Card 1 -->
+      <a href="https://symphonious-brioche-4e4e59.netlify.app/" target="_blank" rel="noopener" class="portfolio-card" data-category="web" style="display:block; text-decoration:none; color:inherit;">
+        <div class="card-img">
+          <div class="card-img-bg" style="height:100%; overflow:hidden;">
+            <img src="скриншот.png" alt="Meridian Studio" style="width:100%; height:100%; object-fit:cover; object-position:top;" />
+          </div>
+          <div class="card-overlay"><span class="card-view">Открыть сайт ↗</span></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-web">Сайт</span>
+          <div class="card-name">Ваше право</div>
+          <div class="card-desc">Сайт юридического агентства — понятная подача услуг и удобная форма для записи на консультацию.</div>
+        </div>
+      </a>
+      <!-- Card SMM -->
+      <a href="https://gotovie-posti.netlify.app/" target="_blank" rel="noopener" class="portfolio-card" data-category="auto" style="display:block; text-decoration:none; color:inherit;">
+        <div class="card-img">
+          <div class="card-img-bg" style="height:100%; overflow:hidden;">
+            <img src="скриншот 2.png" alt="Готовые посты для Telegram" style="width:100%; height:100%; object-fit:cover; object-position:top;" />
+          </div>
+          <div class="card-overlay"><span class="card-view">Открыть сайт ↗</span></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-auto">SMM</span>
+          <div class="card-name">Юридическое агентство</div>
+          <div class="card-desc">Готовые посты для Telegram — контент-план на месяц для юридического блога.</div>
+        </div>
+      </a>
+
+      <!-- Card 3 -->
+      <a href="https://marvelous-gingersnap-9c49c0.netlify.app/" target="_blank" rel="noopener" class="portfolio-card" data-category="web" style="display:block; text-decoration:none; color:inherit;">
+        <div class="card-img">
+          <div class="card-img-bg" style="height:100%; overflow:hidden;">
+            <img src="скриншо 3.png" alt="Проект" style="width:100%; height:100%; object-fit:cover; object-position:top;" />
+          </div>
+          <div class="card-overlay"><span class="card-view">Открыть сайт ↗</span></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-web">Сайт</span>
+          <div class="card-name">Мои финансы</div>
+          <div class="card-desc">Веб-приложение для управления личными финансами — учёт доходов и расходов, бюджеты и аналитика.</div>
+        </div>
+      </a>
+
+      <!-- Card Florist -->
+      <a href="https://willowy-rabanadas-116f36.netlify.app/" target="_blank" rel="noopener" class="portfolio-card" data-category="web" style="display:block; text-decoration:none; color:inherit;">
+        <div class="card-img">
+          <div class="card-img-bg" style="height:100%; overflow:hidden;">
+            <img src="скриншот 4.png" alt="Цветочный магазин" style="width:100%; height:100%; object-fit:cover; object-position:top;" />
+          </div>
+          <div class="card-overlay"><span class="card-view">Открыть сайт ↗</span></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-web">Сайт</span>
+          <div class="card-name">Цветочный магазин</div>
+          <div class="card-desc">Сайт-витрина для флористики — каталог букетов и онлайн-заказ.</div>
+        </div>
+      </a>
+
+      <!-- Card 3 -->
+      <div class="portfolio-card" data-category="bot">
+        <div class="card-img">
+          <div class="card-img-bg" style="background: linear-gradient(135deg, #ffe8dc 0%, #ffd0b5 60%, #ffb68a 100%); height:100%; display:flex; align-items:center; justify-content:center;">
+            <svg width="80" height="60" viewBox="0 0 80 60" fill="none"><rect x="10" y="14" width="38" height="24" rx="4" fill="none" stroke="#FF6B35" stroke-width="1.5"/><rect x="14" y="20" width="20" height="2" rx="1" fill="#FF6B35" opacity="0.7"/><rect x="14" y="26" width="28" height="2" rx="1" fill="#FF6B35" opacity="0.4"/><path d="M10 38 L18 38 L22 46 L10 38Z" fill="#FF6B35" opacity="0.4"/><rect x="34" y="22" width="36" height="20" rx="4" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/><rect x="38" y="27" width="16" height="2" rx="1" fill="#FF6B35" opacity="0.5"/><rect x="38" y="33" width="24" height="2" rx="1" fill="#FF6B35" opacity="0.3"/><path d="M70 42 L62 42 L58 50 L70 42Z" fill="#FF6B35" opacity="0.3"/></svg>
+          </div>
+          <div class="card-overlay"><span class="card-view">View Case ↗</span></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-bot">Бот</span>
+          <div class="card-name">SalesBot Pro</div>
+          <div class="card-desc">Telegram-бот для воронки продаж с интеграцией CRM.</div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="portfolio-card" data-category="auto">
+        <div class="card-img">
+          <div class="card-img-bg" style="background: linear-gradient(135deg, #ffd6f0 0%, #ffb3e3 60%, #ff85d2 100%); height:100%; display:flex; align-items:center; justify-content:center;">
+            <svg width="80" height="56" viewBox="0 0 80 56" fill="none"><circle cx="14" cy="28" r="8" stroke="#FF3CAC" stroke-width="1.5"/><circle cx="40" cy="14" r="8" stroke="#FF3CAC" stroke-width="1.5"/><circle cx="40" cy="42" r="8" stroke="#FF3CAC" stroke-width="1.5"/><circle cx="66" cy="28" r="8" stroke="#FF3CAC" stroke-width="1.5"/><line x1="22" y1="24" x2="32" y2="17" stroke="#FF3CAC" stroke-width="1" opacity="0.5"/><line x1="22" y1="32" x2="32" y2="39" stroke="#FF3CAC" stroke-width="1" opacity="0.5"/><line x1="48" y1="17" x2="58" y2="24" stroke="#FF3CAC" stroke-width="1" opacity="0.5"/><line x1="48" y1="39" x2="58" y2="32" stroke="#FF3CAC" stroke-width="1" opacity="0.5"/></svg>
+          </div>
+          <div class="card-overlay"><span class="card-view">View Case ↗</span></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-auto">SMM</span>
+          <div class="card-name">Bloom Agency</div>
+          <div class="card-desc">Ведение Instagram и Telegram для бьюти-бренда: +12 000 подписчиков за 3 месяца.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ══════════════════════════════════════ -->
+<section id="testimonials">
+  <div class="container">
+    <div class="testimonials-header">
+      <div class="section-label reveal">Что говорят клиенты</div>
+      <h2 class="testimonials-title font-display reveal reveal-delay-1">Отзывы</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <span class="testimonial-quote-mark">"</span>
+        <p class="testimonial-text">Работали с несколькими агентствами до VEKTRA — везде шаблонные решения и постоянные объяснения, почему «так нельзя». Здесь с первой встречи почувствовали, что нас слышат. Лендинг сделали за 3 недели, конверсия выросла с 1,8% до 4,3%.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background: linear-gradient(135deg, #6C3BFF, #8B5CF6);">АК</div>
+          <div>
+            <div class="testimonial-name">Алексей Котов</div>
+            <div class="testimonial-role">CEO, Kotov Legal Group</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <span class="testimonial-quote-mark">"</span>
+        <p class="testimonial-text">Заказывали Telegram-бота для обработки заявок. Ребята не просто написали код — они предложили логику воронки, которую мы сами не додумались. Бот закрывает 60% входящих без участия менеджера. Окупился за 6 недель.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background: linear-gradient(135deg, #00D4AA, #0891b2);">МС</div>
+          <div>
+            <div class="testimonial-name">Марина Семёнова</div>
+            <div class="testimonial-role">Основатель, Beauty Studio M</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <span class="testimonial-quote-mark">"</span>
+        <p class="testimonial-text">Автоматизировали документооборот между нашей CRM и 1С. Процесс, который занимал 4 часа в день у двух сотрудников, теперь работает сам. VEKTRA сделали это аккуратно, без лишних инструментов и с нормальной документацией.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background: linear-gradient(135deg, #FF3CAC, #FF6B35);">ДВ</div>
+          <div>
+            <div class="testimonial-name">Дмитрий Волков</div>
+            <div class="testimonial-role">COO, StroyGroup</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROCESS ═══════════════════════════════════════════ -->
+<section id="process">
+  <div class="container">
+    <div class="section-label reveal">Как мы работаем</div>
+    <h2 class="process-title font-display reveal reveal-delay-1">Наш процесс</h2>
+    <div class="process-track">
+      <div class="process-step reveal">
+        <div class="step-num">01</div>
+        <div class="step-title">Погружение</div>
+        <p class="step-desc">Изучаем бизнес, пользователей и цели. Никаких догадок — только решения на основе реального контекста.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <div class="step-title">Дизайн</div>
+        <p class="step-desc">Вайрфреймы, прототипы и визуальные системы — вокруг пользователя, а не вокруг трендов.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <div class="step-title">Разработка</div>
+        <p class="step-desc">Чистый код, протестированные интерфейсы, доставка с фокусом на производительность. Вы в курсе каждого спринта.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="step-num">04</div>
+        <div class="step-title">Запуск</div>
+        <p class="step-desc">Выпускаем, следим, итерируем. Отношения не заканчиваются на деплое — они начинаются.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ══════════════════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="section-label reveal">Кто мы</div>
+    <div class="about-grid">
+      <div>
+        <h2 class="about-quote reveal reveal-delay-1">
+          Небольшая команда с <em>неоправданно высокими</em> стандартами.
+        </h2>
+      </div>
+      <div>
+        <p class="about-body reveal">
+          VEKTRA — это бутиковое цифровое агентство. Мы не берём объём — мы берём точность. Каждый проект получает наше полное внимание: от первого пикселя до последнего API-вызова.
+          <br/><br/>
+          Мы запускали продукты для стартапов, растущих компаний и основателей, которым нужна команда-партнёр, а не подрядчик.
+        </p>
+        <div class="values reveal reveal-delay-1">
+          <div class="value-item">
+            <div class="value-icon">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="#6C3BFF" stroke-width="1.5" stroke-linecap="square"/></svg>
+            </div>
+            Точность важнее скорости
+          </div>
+          <div class="value-item">
+            <div class="value-icon">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="#6C3BFF" stroke-width="1.5" stroke-linecap="square"/></svg>
+            </div>
+            Честная коммуникация
+          </div>
+          <div class="value-item">
+            <div class="value-icon">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="#6C3BFF" stroke-width="1.5" stroke-linecap="square"/></svg>
+            </div>
+            Никаких шаблонов
+          </div>
+          <div class="value-item">
+            <div class="value-icon">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="#6C3BFF" stroke-width="1.5" stroke-linecap="square"/></svg>
+            </div>
+            Мышление владельца
+          </div>
+        </div>
+        <div class="stats reveal reveal-delay-2">
+          <div class="stat">
+            <div class="stat-num" data-count="48"><span>0</span></div>
+            <div class="stat-label">Проектов запущено</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" data-count="5"><span>0</span>+</div>
+            <div class="stat-label">Лет в разработке</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" data-count="12"><span>0</span></div>
+            <div class="stat-label">Стран</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══════════════════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label reveal">Связаться с нами</div>
+    <div class="contact-grid">
+      <div>
+        <h2 class="contact-headline font-display reveal reveal-delay-1">
+          Давай<br /><em>поговорим.</em>
+        </h2>
+        <a href="mailto:hello@vektra.agency" class="contact-email reveal reveal-delay-2">hello@vektra.agency</a>
+        <div class="socials reveal reveal-delay-3">
+          <a href="#" class="social-link" aria-label="Telegram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21.8 3L1 11.2c-1.3.5-1.3 1.3-.2 1.6l5.1 1.6 11.8-7.5c.6-.4 1.1-.2.7.2L8.7 16.1l-.4 5.2c.5 0 .8-.2 1-.5l2.5-2.4 5.2 3.8c1 .5 1.6.3 1.8-.9l3.3-15.6c.3-1.5-.6-2.2-1.3-2.7Z" fill="currentColor"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="GitHub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.57 9.57 0 0112 6.8c.85.004 1.7.115 2.5.336 1.9-1.29 2.74-1.02 2.74-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48C19.14 20.16 22 16.42 22 12c0-5.52-4.48-10-10-10Z" fill="currentColor"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Behance">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 12h4.5M15 8h4M7.5 16H12c1.66 0 3-1.34 3-3s-1.34-3-3-3H7.5V16Zm0 0H7V8h3.5c1.38 0 2.5 1.12 2.5 2.5S11.88 13 10.5 13H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M7 10v7M7 7v.5M11 17v-4c0-1.1.9-2 2-2s2 .9 2 2v4M11 10v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <!-- Formspree: зарегистрируйся на formspree.io и замени YOUR_FORM_ID -->
+        <form class="form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-field">
+            <label for="f-name">Имя</label>
+            <input type="text" id="f-name" name="name" placeholder="Ваше имя" required />
+          </div>
+          <div class="form-field">
+            <label for="f-email">Email</label>
+            <input type="email" id="f-email" name="email" placeholder="you@example.com" required />
+          </div>
+          <div class="form-field">
+            <label for="f-type">Тип проекта</label>
+            <select id="f-type" name="type">
+              <option value="">Выберите услугу...</option>
+              <option>Сайт / лендинг</option>
+              <option>Веб-приложение</option>
+              <option>Мобильное приложение</option>
+              <option>Telegram / WhatsApp бот</option>
+              <option>Автоматизация процессов</option>
+              <option>API-интеграция</option>
+              <option>Другое</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="f-msg">Сообщение</label>
+            <textarea id="f-msg" name="message" placeholder="Расскажите о вашем проекте..."></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="form-btn">Отправить сообщение →</button>
+        </form>
+        <div class="form-success" id="form-success">
+          <div class="success-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 7" stroke="#00D4AA" stroke-width="2" stroke-linecap="square"/></svg>
+          </div>
+          <div class="success-title">Сообщение отправлено!</div>
+          <div class="success-text">Мы ответим в течение 24 часов.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════ -->
+<footer>
+  <div class="container footer-inner">
+    <span class="footer-copy">© 2025 VEKTRA. Все права защищены.</span>
+    <a href="#hero" class="footer-back">
+      Наверх
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 10V2M2 6l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script>
+  function init() {
+    setupNav();
+    setupReveal();
+    setupPortfolio();
+    setupCounters();
+    setupForm();
+  }
+
+  /* ─── Nav ─────────────────────────────────────────────── */
+  function setupNav() {
+    const nav    = document.getElementById('nav');
+    const burger = document.getElementById('burger');
+    const drawer = document.getElementById('drawer');
+    const links  = document.querySelectorAll('.nav-links a[href^="#"]');
+    const drawerLinks = document.querySelectorAll('.drawer-link');
+
+    // Scroll state
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Burger
+    burger.addEventListener('click', () => {
+      const open = burger.classList.toggle('open');
+      drawer.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    // Drawer links close drawer
+    drawerLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('open');
+        drawer.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Scroll spy
+    const sections = document.querySelectorAll('section[id]');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(s => observer.observe(s));
+  }
+
+  /* ─── Scroll reveal ───────────────────────────────────── */
+  function setupReveal() {
+    const els = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => observer.observe(el));
+  }
+
+  /* ─── Portfolio filter ────────────────────────────────── */
+  function setupPortfolio() {
+    const btns  = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.portfolio-card');
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          const match = filter === 'all' || card.dataset.category === filter;
+          card.style.transition = 'opacity 0.3s, transform 0.3s';
+          if (match) {
+            card.classList.remove('hidden');
+            requestAnimationFrame(() => { card.style.opacity = '1'; card.style.transform = ''; });
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => { if (!match) card.classList.add('hidden'); }, 300);
+          }
+        });
+      });
+    });
+  }
+
+  /* ─── Counters ────────────────────────────────────────── */
+  function setupCounters() {
+    const stats = document.querySelectorAll('.stat-num[data-count]');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el     = entry.target;
+          const target = parseInt(el.dataset.count, 10);
+          const span   = el.querySelector('span');
+          if (!span) return;
+          let current  = 0;
+          const duration = 1200;
+          const start  = performance.now();
+          function tick(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3);
+            current = Math.round(ease * target);
+            span.textContent = current;
+            if (progress < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    stats.forEach(el => observer.observe(el));
+  }
+
+  /* ─── Form ────────────────────────────────────────────── */
+  function setupForm() {
+    const form    = document.getElementById('contact-form');
+    const success = document.getElementById('form-success');
+    const btn     = document.getElementById('form-btn');
+    if (!form) return;
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+
+      // Кнопка — состояние загрузки
+      btn.disabled = true;
+      btn.textContent = 'Отправляем...';
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          // Успех
+          form.style.opacity = '0';
+          form.style.transition = 'opacity 0.4s';
+          setTimeout(() => {
+            form.style.display = 'none';
+            success.classList.add('show');
+          }, 400);
+        } else {
+          // Ошибка от сервера
+          btn.disabled = false;
+          btn.textContent = 'Ошибка — попробуйте снова';
+          btn.style.background = '#ef4444';
+          setTimeout(() => {
+            btn.textContent = 'Отправить сообщение →';
+            btn.style.background = '';
+          }, 3000);
+        }
+      } catch {
+        // Нет сети
+        btn.disabled = false;
+        btn.textContent = 'Нет соединения — попробуйте снова';
+        btn.style.background = '#ef4444';
+        setTimeout(() => {
+          btn.textContent = 'Отправить сообщение →';
+          btn.style.background = '';
+        }, 3000);
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
