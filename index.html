@@ -252,7 +252,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.8rem;
+      font-size: 1rem;
+      font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--accent2);
@@ -362,7 +363,7 @@
     /* ═══════════════════════════════════════════════════════
        SERVICES
     ═══════════════════════════════════════════════════════ */
-    #services { border-top: 1px solid var(--border); }
+    #services { border-top: 1px solid var(--border); padding-bottom: clamp(2rem, 4vw, 3.5rem); }
     .services-header {
       display: flex;
       align-items: flex-end;
@@ -441,7 +442,7 @@
     /* ═══════════════════════════════════════════════════════
        PORTFOLIO
     ═══════════════════════════════════════════════════════ */
-    #portfolio { border-top: 1px solid var(--border); }
+    #portfolio { border-top: 1px solid var(--border); padding-top: clamp(2rem, 4vw, 3.5rem); }
     .portfolio-header {
       display: flex;
       align-items: flex-end;
@@ -1025,6 +1026,21 @@
     </div>
 
     <div class="portfolio-grid reveal">
+      <!-- Card BashkirMed -->
+      <a href="https://milayul.github.io/bashkir-med/" target="_blank" rel="noopener" class="portfolio-card" data-category="web" style="display:block; text-decoration:none; color:inherit;">
+        <div class="card-img">
+          <div class="card-img-bg" style="height:100%; overflow:hidden;">
+            <img src="скриншот 5.png" alt="Bashkir Med" style="width:100%; height:100%; object-fit:cover; object-position:top;" />
+          </div>
+          <div class="card-overlay"><span class="card-view">Открыть сайт ↗</span></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-web">Сайт</span>
+          <div class="card-name">Башкирский мёд</div>
+          <div class="card-desc">Сайт семейной пасеки — каталог сортов мёда, история производства и доставка по России.</div>
+        </div>
+      </a>
+
       <!-- Card 1 -->
       <a href="https://symphonious-brioche-4e4e59.netlify.app/" target="_blank" rel="noopener" class="portfolio-card" data-category="web" style="display:block; text-decoration:none; color:inherit;">
         <div class="card-img">
@@ -1071,7 +1087,7 @@
       </a>
 
       <!-- Card 3 -->
-      <a href="https://milayul.github.io/moi-finansi/" target="_blank" rel="noopener" class="portfolio-card" data-category="web" style="display:block; text-decoration:none; color:inherit;">
+      <a href="https://milayul.github.io/moi-finansi/" target="_blank" rel="noopener" class="portfolio-card" data-category="app" style="display:block; text-decoration:none; color:inherit;">
         <div class="card-img">
           <div class="card-img-bg" style="height:100%; overflow:hidden;">
             <img src="скриншо 3.png" alt="Проект" style="width:100%; height:100%; object-fit:cover; object-position:top;" />
@@ -1079,7 +1095,7 @@
           <div class="card-overlay"><span class="card-view">Открыть сайт ↗</span></div>
         </div>
         <div class="card-body">
-          <span class="card-tag tag-web">Сайт</span>
+          <span class="card-tag tag-app">Приложение</span>
           <div class="card-name">Мои финансы</div>
           <div class="card-desc">Веб-приложение для управления личными финансами — учёт доходов и расходов, бюджеты и аналитика.</div>
         </div>
@@ -1173,16 +1189,6 @@
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="#6C3BFF" stroke-width="1.5" stroke-linecap="square"/></svg>
             </div>
             Мышление владельца
-          </div>
-        </div>
-        <div class="stats reveal reveal-delay-2">
-          <div class="stat">
-            <div class="stat-num" data-count="48"><span>0</span></div>
-            <div class="stat-label">Проектов запущено</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num" data-count="5"><span>0</span>+</div>
-            <div class="stat-label">Лет в разработке</div>
           </div>
         </div>
       </div>
