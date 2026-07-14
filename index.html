@@ -561,19 +561,28 @@
       letter-spacing: -0.03em;
       margin-bottom: 3.5rem;
     }
-    .process-track {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      gap: 1.5rem;
-      padding-bottom: 1.5rem;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
+    .process-layout {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 2.5rem;
+      align-items: stretch;
     }
-    .process-track::-webkit-scrollbar { display: none; }
+    @media (max-width: 900px) { .process-layout { grid-template-columns: 1fr; } }
+    .process-photo {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .process-track {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 640px) { .process-track { grid-template-columns: 1fr; } }
     .process-step {
-      scroll-snap-align: start;
-      flex: 0 0 min(340px, 82vw);
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -911,7 +920,7 @@
       <li><a href="#portfolio">Портфолио</a></li>
       <li><a href="#process">Процесс</a></li>
       <li><a href="#about">О нас</a></li>
-      <li><a href="mailto:hello@vektra.agency" class="nav-cta">Обсудить проект</a></li>
+      <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=lydayl777@gmail.com" target="_blank" rel="noopener" class="nav-cta">Обсудить проект</a></li>
     </ul>
     <button class="burger" id="burger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -925,7 +934,7 @@
   <a href="#portfolio" class="drawer-link">Портфолио</a>
   <a href="#process" class="drawer-link">Процесс</a>
   <a href="#about" class="drawer-link">О нас</a>
-  <a href="mailto:hello@vektra.agency" class="drawer-link">Контакты</a>
+  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lydayl777@gmail.com" target="_blank" rel="noopener" class="drawer-link">Контакты</a>
 </nav>
 
 <!-- ═══ HERO ═══════════════════════════════════════════════ -->
@@ -933,15 +942,22 @@
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="container hero-content">
+    <svg width="72" height="72" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="VEKTRA" style="margin-bottom: 1.5rem;">
+      <path d="M4 6 L16 26 L28 6" stroke="#6C3BFF" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+      <line x1="22" y1="6" x2="32" y2="6" stroke="#6C3BFF" stroke-width="2.5" stroke-linecap="square"/>
+    </svg>
     <div class="hero-eyebrow">
       <span class="hero-eyebrow-dot"></span>
       Цифровое агентство
     </div>
-    <h1 class="hero-title font-display">
-      Делаем то,<br />
-      что нельзя<br />
-      <em>скачать.</em>
-    </h1>
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap;">
+      <h1 class="hero-title font-display" style="margin-bottom:0; font-size:clamp(2.2rem, 6vw, 5.5rem);">
+        Делаем то,<br />
+        что нельзя<br />
+        <em>скачать.</em>
+      </h1>
+      <img src="фото агенства.jpg" alt="VEKTRA" style="width:380px; height:380px; border-radius:16px; object-fit:cover; border:2px solid var(--accent); flex-shrink:0; margin-left:auto;" />
+    </div>
     <p class="hero-sub">
       Сайты, приложения, боты, автоматизация — сделано с точностью.
       Без шаблонов. Без компромиссов. Только настоящий цифровой продукт.
@@ -951,7 +967,7 @@
         Смотреть работы
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
       </a>
-      <a href="mailto:hello@vektra.agency" class="btn-ghost">Начать проект</a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lydayl777@gmail.com" target="_blank" rel="noopener" class="btn-ghost">Начать проект</a>
     </div>
   </div>
   <div class="hero-scroll">
@@ -1124,27 +1140,30 @@
   <div class="container">
     <div class="section-label reveal">Как мы работаем</div>
     <h2 class="process-title font-display reveal reveal-delay-1">Наш процесс</h2>
-    <div class="process-track">
-      <div class="process-step reveal">
-        <div class="step-num">01</div>
-        <div class="step-title">Погружение</div>
-        <p class="step-desc">Изучаем бизнес, пользователей и цели. Никаких догадок — только решения на основе реального контекста.</p>
+    <div class="process-layout">
+      <div class="process-track">
+        <div class="process-step reveal">
+          <div class="step-num">01</div>
+          <div class="step-title">Погружение</div>
+          <p class="step-desc">Изучаем бизнес, пользователей и цели. Никаких догадок — только решения на основе реального контекста.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <div class="step-num">02</div>
+          <div class="step-title">Дизайн</div>
+          <p class="step-desc">Вайрфреймы, прототипы и визуальные системы — вокруг пользователя, а не вокруг трендов.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <div class="step-num">03</div>
+          <div class="step-title">Разработка</div>
+          <p class="step-desc">Чистый код, протестированные интерфейсы, доставка с фокусом на производительность. Вы в курсе каждого спринта.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <div class="step-num">04</div>
+          <div class="step-title">Запуск</div>
+          <p class="step-desc">Выпускаем, следим, итерируем. Отношения не заканчиваются на деплое — они начинаются.</p>
+        </div>
       </div>
-      <div class="process-step reveal reveal-delay-1">
-        <div class="step-num">02</div>
-        <div class="step-title">Дизайн</div>
-        <p class="step-desc">Вайрфреймы, прототипы и визуальные системы — вокруг пользователя, а не вокруг трендов.</p>
-      </div>
-      <div class="process-step reveal reveal-delay-2">
-        <div class="step-num">03</div>
-        <div class="step-title">Разработка</div>
-        <p class="step-desc">Чистый код, протестированные интерфейсы, доставка с фокусом на производительность. Вы в курсе каждого спринта.</p>
-      </div>
-      <div class="process-step reveal reveal-delay-3">
-        <div class="step-num">04</div>
-        <div class="step-title">Запуск</div>
-        <p class="step-desc">Выпускаем, следим, итерируем. Отношения не заканчиваются на деплое — они начинаются.</p>
-      </div>
+      <img src="фото 3.jfif" alt="Процесс работы VEKTRA" class="process-photo reveal reveal-delay-2" />
     </div>
   </div>
 </section>
@@ -1158,6 +1177,7 @@
         <h2 class="about-quote reveal reveal-delay-1">
           Небольшая команда с <em>неоправданно высокими</em> стандартами.
         </h2>
+        <img src="фото 2.jpg" alt="Команда VEKTRA" style="width:100%; border-radius:12px; margin-top:2rem; object-fit:cover; border:1px solid var(--border);" />
       </div>
       <div>
         <p class="about-body reveal">
