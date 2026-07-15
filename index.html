@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="VEKTRA — Цифровое агентство. Сайты, приложения, боты, автоматизация." />
+  <meta name="description" content="VEKTRA — лендинги и сайты для малого бизнеса. От 5 000 ₽, готово за 2-3 дня." />
   <meta property="og:url" content="https://symphonious-brioche-4e4e59.netlify.app/" />
   <meta property="og:title" content="VEKTRA — Делаем то, что нельзя скачать." />
-  <meta property="og:description" content="Цифровое агентство. Сайты, приложения, боты, ведение соцсетей." />
+  <meta property="og:description" content="Лендинги и сайты для малого бизнеса. От 5 000 ₽, готово за 2-3 дня." />
   <link rel="canonical" href="https://symphonious-brioche-4e4e59.netlify.app/" />
   <title>VEKTRA — Делаем то, что нельзя скачать с шаблонника.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,7 +22,7 @@
       --accent:   #6C3BFF;
       --accent2:  #8B5CF6;
       --text:     #0D0B1A;
-      --muted:    #6B6585;
+      --muted:    #57517A;
       --tag-web:  #6C3BFF;
       --tag-app:  #00D4AA;
       --tag-bot:  #FF6B35;
@@ -287,6 +287,7 @@
     }
     .hero-sub {
       font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 500;
       color: var(--muted);
       max-width: 540px;
       line-height: 1.65;
@@ -425,6 +426,7 @@
     .service-row:hover .service-name { color: var(--accent2); }
     .service-desc {
       font-size: 0.85rem;
+      font-weight: 500;
       color: var(--muted);
       max-height: 0;
       overflow: hidden;
@@ -438,6 +440,45 @@
       transition: transform var(--t), color var(--t);
     }
     .service-row:hover .service-arrow { transform: translate(4px, -4px); color: var(--accent); }
+
+    /* ═══════════════════════════════════════════════════════
+       PRICING
+    ═══════════════════════════════════════════════════════ */
+    #pricing { border-top: 1px solid var(--border); }
+    .pricing-card {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 2.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem clamp(1.5rem, 4vw, 3rem);
+    }
+    @media (max-width: 768px) {
+      .pricing-card { grid-template-columns: 1fr; text-align: center; gap: 1.5rem; }
+    }
+    .pricing-amount {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .pricing-amount span { color: var(--accent); }
+    .pricing-details { min-width: 0; }
+    .pricing-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    @media (max-width: 768px) { .pricing-list { justify-content: center; } }
+    .pricing-list li { display: flex; align-items: center; gap: 0.4rem; }
+    .pricing-list li::before { content: '✓'; color: var(--tag-app); font-weight: 700; }
 
     /* ═══════════════════════════════════════════════════════
        PORTFOLIO
@@ -548,7 +589,7 @@
       letter-spacing: -0.02em;
       margin-bottom: 0.3rem;
     }
-    .card-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+    .card-desc { font-size: 0.82rem; font-weight: 500; color: var(--muted); line-height: 1.5; }
 
     /* ═══════════════════════════════════════════════════════
        PROCESS
@@ -621,7 +662,7 @@
       margin-bottom: 0.75rem;
       letter-spacing: -0.02em;
     }
-    .step-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+    .step-desc { font-size: 0.875rem; font-weight: 500; color: var(--muted); line-height: 1.65; }
 
     /* ═══════════════════════════════════════════════════════
        ABOUT
@@ -646,7 +687,7 @@
       font-style: normal;
       color: var(--accent2);
     }
-    .about-body { font-size: 1rem; color: var(--muted); line-height: 1.75; margin-bottom: 2.5rem; }
+    .about-body { font-size: 1rem; font-weight: 500; color: var(--muted); line-height: 1.75; margin-bottom: 2.5rem; }
     .values {
       display: flex;
       flex-direction: column;
@@ -917,6 +958,7 @@
     </a>
     <ul class="nav-links">
       <li><a href="#services">Услуги</a></li>
+      <li><a href="#pricing">Цены</a></li>
       <li><a href="#portfolio">Портфолио</a></li>
       <li><a href="#process">Процесс</a></li>
       <li><a href="#about">О нас</a></li>
@@ -931,6 +973,7 @@
 <!-- Mobile drawer -->
 <nav class="nav-drawer" id="drawer">
   <a href="#services" class="drawer-link">Услуги</a>
+  <a href="#pricing" class="drawer-link">Цены</a>
   <a href="#portfolio" class="drawer-link">Портфолио</a>
   <a href="#process" class="drawer-link">Процесс</a>
   <a href="#about" class="drawer-link">О нас</a>
@@ -959,8 +1002,8 @@
       <img src="фото агенства.jpg" alt="VEKTRA" style="width:clamp(160px, 30vw, 380px); height:clamp(160px, 30vw, 380px); max-width:100%; border-radius:16px; object-fit:cover; border:2px solid var(--accent); flex-shrink:0; margin-left:auto;" />
     </div>
     <p class="hero-sub">
-      Сайты, приложения, боты, автоматизация — сделано с точностью.
-      Без шаблонов. Без компромиссов. Только настоящий цифровой продукт.
+      Лендинги и сайты для малого бизнеса — без раздутых смет и долгих согласований.
+      Первая версия за 2-3 дня.
     </p>
     <div class="hero-actions">
       <a href="#portfolio" class="btn-primary">
@@ -993,7 +1036,7 @@
       <span class="service-num">01</span>
       <div class="service-info">
         <div class="service-name">Сайты и лендинги</div>
-        <div class="service-desc">Конвертирующие страницы, которые работают быстро и выглядят убедительно.</div>
+        <div class="service-desc">От 5 000 ₽, готово за 2-3 дня. Конвертирующие страницы для малого бизнеса.</div>
       </div>
       <span class="service-arrow">↗</span>
     </div>
@@ -1020,6 +1063,29 @@
         <div class="service-desc">Создаём контент, который работает на репутацию и привлекает аудиторию.</div>
       </div>
       <span class="service-arrow">↗</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══════════════════════════════════════════ -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-label reveal">Сколько это стоит</div>
+    <div class="pricing-card reveal reveal-delay-1">
+      <div class="pricing-amount">от <span>5 000 ₽</span></div>
+      <div class="pricing-details">
+        <div class="service-name" style="margin-bottom:0;">Лендинг под ключ</div>
+        <ul class="pricing-list">
+          <li>Готово за 2-3 дня</li>
+          <li>Адаптивная вёрстка</li>
+          <li>Форма заявки</li>
+          <li>Публикация на хостинге</li>
+        </ul>
+      </div>
+      <a href="#contact" class="btn-primary">
+        Обсудить проект
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -1181,16 +1247,16 @@
       </div>
       <div>
         <p class="about-body reveal">
-          VEKTRA — это бутиковое цифровое агентство. Мы не берём объём — мы берём точность. Каждый проект получает наше полное внимание: от первого пикселя до последнего API-вызова.
+          VEKTRA — агентство для малого и локального бизнеса. Мы не берём в работу десятки проектов одновременно — берём точность и скорость. Каждый лендинг и сайт получает полное внимание: от первого пикселя до формы заявки.
           <br/><br/>
-          Мы запускали продукты для стартапов, растущих компаний и основателей, которым нужна команда-партнёр, а не подрядчик.
+          Делаем сайты для клиник, мастерских, магазинов и локальных сервисов — тем, кому нужен рабочий сайт быстро, а не полугодовой проект с созвонами.
         </p>
         <div class="values reveal reveal-delay-1">
           <div class="value-item">
             <div class="value-icon">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="#6C3BFF" stroke-width="1.5" stroke-linecap="square"/></svg>
             </div>
-            Точность важнее скорости
+            Быстро — но без потери качества
           </div>
           <div class="value-item">
             <div class="value-icon">
