@@ -285,6 +285,27 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+    .hero-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero-photo {
+      width: clamp(160px, 30vw, 380px);
+      height: clamp(160px, 30vw, 380px);
+      max-width: 100%;
+      border-radius: 16px;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+    @media (max-width: 640px) {
+      .hero-top { flex-direction: column; gap: 1.5rem; }
+      .hero-photo { width: 150px; height: 150px; margin: 0 auto; }
+    }
     .hero-sub {
       font-size: clamp(1rem, 2vw, 1.25rem);
       font-weight: 500;
@@ -993,13 +1014,13 @@
       <span class="hero-eyebrow-dot"></span>
       Цифровое агентство
     </div>
-    <div style="display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap;">
+    <div class="hero-top">
       <h1 class="hero-title font-display" style="margin-bottom:0; font-size:clamp(2.2rem, 6vw, 5.5rem);">
         Делаем то,<br />
         что нельзя<br />
         <em>скачать.</em>
       </h1>
-      <img src="фото агенства.jpg" alt="VEKTRA" style="width:clamp(160px, 30vw, 380px); height:clamp(160px, 30vw, 380px); max-width:100%; border-radius:16px; object-fit:cover; border:2px solid var(--accent); flex-shrink:0; margin-left:auto;" />
+      <img src="фото агенства.jpg" alt="VEKTRA" class="hero-photo" />
     </div>
     <p class="hero-sub">
       Лендинги и сайты для малого бизнеса — без раздутых смет и долгих согласований.
